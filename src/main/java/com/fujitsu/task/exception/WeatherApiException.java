@@ -11,7 +11,7 @@ public class WeatherApiException extends RuntimeException {
     }
 
     /**
-     * @param message description of the failure
+     * Description of the failure
      * @param cause   underlying exception
      */
     public WeatherApiException(String message, Throwable cause) {
