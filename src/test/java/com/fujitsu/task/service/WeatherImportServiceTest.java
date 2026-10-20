@@ -34,6 +34,9 @@ class WeatherImportServiceTest {
     @Mock
     private WeatherObservationRepository weatherObservationRepository;
 
+    @Spy
+    private WeatherObservationMapper weatherObservationMapper = new WeatherObservationMapper();
+
     @InjectMocks
     private WeatherImportService weatherImportService;
 
