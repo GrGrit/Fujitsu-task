@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.time.Instant;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Data access for {@link ExtraFeeRule} rules.
@@ -22,4 +23,14 @@ public interface ExtraFeeRuleRepository extends JpaRepository<ExtraFeeRule, Long
               and r.validFrom <= :moment and (r.validTo is null or r.validTo > :moment)
             """)
     List<ExtraFeeRule> findAllValidAt(VehicleType vehicleType, Instant moment);
+
+    /**
+     * @return all rules currently in force
+     */
+    List<ExtraFeeRule> findAllByValidToIsNull();
+
+    /**
+     * @return the rule if it exists and is currently in force
+     */
+    Optional<ExtraFeeRule> findByIdAndValidToIsNull(Long id);
 }
