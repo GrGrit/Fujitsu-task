@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<observations timestamp="1767960900">
+    <station>
+        <name>Kuressaare linn</name>
+        <wmocode></wmocode>
+        <longitude>22.48944444411111</longitude>
+        <latitude>58.26416666666667</latitude>
+        <phenomenon></phenomenon>
+        <airtemperature>9.5</airtemperature>
+        <windspeed></windspeed>
+    </station>
+    <station>
+        <name>Tallinn-Harku</name>
+        <wmocode>26038</wmocode>
+        <longitude>24.602891666624284</longitude>
+        <latitude>59.398122222355134</latitude>
+        <phenomenon>Clear</phenomenon>
+        <visibility>35</visibility>
+        <airtemperature>10.1</airtemperature>
+        <windspeed>1.9</windspeed>
+        <windspeedmax>2.6</windspeedmax>
+        <waterlevel />
+    </station>
+    <station>
+        <name>Tartu-Tõravere</name>
+        <wmocode>26242</wmocode>
+        <phenomenon>Light snow shower</phenomenon>
+        <airtemperature>-2.1</airtemperature>
+        <windspeed>4.7</windspeed>
+    </station>
+    <station>
+        <name>Pärnu</name>
+        <wmocode>41803</wmocode>
+        <phenomenon></phenomenon>
+        <airtemperature>11.4</airtemperature>
+        <windspeed></windspeed>
+    </station>
+</observations>
