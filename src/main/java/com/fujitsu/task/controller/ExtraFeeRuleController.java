@@ -3,6 +3,8 @@ package com.fujitsu.task.controller;
 import com.fujitsu.task.dto.ExtraFeeRuleRequest;
 import com.fujitsu.task.dto.ExtraFeeRuleResponse;
 import com.fujitsu.task.service.ExtraFeeRuleService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -21,6 +23,7 @@ import java.util.List;
 /**
  * CRUD endpoints for weather-based extra fee rules.
  */
+@Tag(name = "Extra fee rules", description = "Manage weather-based extra fee rules")
 @RestController
 @RequestMapping("/api/extra-fees")
 @RequiredArgsConstructor
@@ -31,6 +34,7 @@ public class ExtraFeeRuleController {
     /**
      * @return all extra fee rules currently in force
      */
+    @Operation(summary = "List extra fee rules currently in force")
     @GetMapping
     public List<ExtraFeeRuleResponse> getAll() {
         return extraFeeRuleService.findAllActive();
@@ -39,6 +43,7 @@ public class ExtraFeeRuleController {
     /**
      * @return the rule, including closed versions
      */
+    @Operation(summary = "Get extra fee rule by id", description = "Also returns closed versions.")
     @GetMapping("/{id}")
     public ExtraFeeRuleResponse getById(@PathVariable Long id) {
         return extraFeeRuleService.findById(id);
@@ -47,6 +52,7 @@ public class ExtraFeeRuleController {
     /**
      * @return the created rule
      */
+    @Operation(summary = "Create extra fee rule", description = "Range rules (AIR_TEMPERATURE, WIND_SPEED) need minValue and/or maxValue, WEATHER_PHENOMENON rules need phenomenonKeyword.")
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ExtraFeeRuleResponse create(@Valid @RequestBody ExtraFeeRuleRequest request) {
@@ -56,6 +62,7 @@ public class ExtraFeeRuleController {
     /**
      * Replaces a rule with a new version. The returned rule has a new id.
      */
+    @Operation(summary = "Update extra fee rule", description = "Closes the current version and creates a new one with a new id.")
     @PutMapping("/{id}")
     public ExtraFeeRuleResponse update(@PathVariable Long id, @Valid @RequestBody ExtraFeeRuleRequest request) {
         return extraFeeRuleService.update(id, request);
@@ -64,6 +71,7 @@ public class ExtraFeeRuleController {
     /**
      * Ends the validity of a rule. It stays available for calculations at earlier points in time.
      */
+    @Operation(summary = "Delete extra fee rule", description = "Ends the validity of the rule; it is still used for past calculations.")
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable Long id) {

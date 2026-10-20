@@ -1,6 +1,8 @@
 package com.fujitsu.task.exception;
 
-
+/**
+ * Thrown when weather data cannot be fetched from or parsed from the external weather service.
+ */
 public class WeatherApiException extends RuntimeException {
 
     /**

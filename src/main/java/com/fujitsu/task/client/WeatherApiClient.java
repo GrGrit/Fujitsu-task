@@ -21,7 +21,9 @@ public class WeatherApiClient {
             .enable(XmlReadFeature.EMPTY_ELEMENT_AS_NULL)
             .build();
 
-
+    /**
+     * Creates the client for the feed at the configured {@code weather.import.url}.
+     */
     public WeatherApiClient(RestClient.Builder restClientBuilder, @Value("${weather.import.url}") String url) {
         this.restClient = restClientBuilder.baseUrl(url).build();
     }

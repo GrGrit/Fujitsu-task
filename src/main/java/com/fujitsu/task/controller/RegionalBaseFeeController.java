@@ -3,6 +3,8 @@ package com.fujitsu.task.controller;
 import com.fujitsu.task.dto.RegionalBaseFeeRequest;
 import com.fujitsu.task.dto.RegionalBaseFeeResponse;
 import com.fujitsu.task.service.RegionalBaseFeeService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -21,6 +23,7 @@ import java.util.List;
 /**
  * CRUD endpoints for regional base fee rules.
  */
+@Tag(name = "Regional base fees", description = "Manage regional base fee rules")
 @RestController
 @RequestMapping("/api/base-fees")
 @RequiredArgsConstructor
@@ -31,6 +34,7 @@ public class RegionalBaseFeeController {
     /**
      * @return all base fee rules currently in force
      */
+    @Operation(summary = "List base fees currently in force")
     @GetMapping
     public List<RegionalBaseFeeResponse> getAll() {
         return regionalBaseFeeService.findAllActive();
@@ -39,6 +43,7 @@ public class RegionalBaseFeeController {
     /**
      * @return the rule, including closed versions
      */
+    @Operation(summary = "Get base fee by id", description = "Also returns closed versions.")
     @GetMapping("/{id}")
     public RegionalBaseFeeResponse getById(@PathVariable Long id) {
         return regionalBaseFeeService.findById(id);
@@ -47,6 +52,7 @@ public class RegionalBaseFeeController {
     /**
      * @return the created rule
      */
+    @Operation(summary = "Create base fee", description = "Fails with 409 if a fee for the city and vehicle type is already in force.")
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public RegionalBaseFeeResponse create(@Valid @RequestBody RegionalBaseFeeRequest request) {
@@ -56,6 +62,7 @@ public class RegionalBaseFeeController {
     /**
      * Replaces a rule with a new version. The returned rule has a new id.
      */
+    @Operation(summary = "Update base fee", description = "Closes the current version and creates a new one with a new id.")
     @PutMapping("/{id}")
     public RegionalBaseFeeResponse update(@PathVariable Long id, @Valid @RequestBody RegionalBaseFeeRequest request) {
         return regionalBaseFeeService.update(id, request);
@@ -64,6 +71,7 @@ public class RegionalBaseFeeController {
     /**
      * Ends the validity of a rule. It stays available for calculations at earlier points in time.
      */
+    @Operation(summary = "Delete base fee", description = "Ends the validity of the rule; it is still used for past calculations.")
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable Long id) {
