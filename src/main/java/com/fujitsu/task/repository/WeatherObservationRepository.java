@@ -14,10 +14,6 @@ public interface WeatherObservationRepository extends JpaRepository<WeatherObser
 
     /**
      * Finds the most recent observation of a station made at or before the given moment.
-     *
-     * @param stationName name of the station
-     * @param moment      upper bound (inclusive) for the observation timestamp
-     * @return the latest matching observation, or empty if the station has no data before that moment
      */
     @Query("""
             select o from WeatherObservation o
